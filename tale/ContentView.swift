@@ -9,8 +9,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var dataHandler : DataHandler
+    @State var isLoggedIn : Bool = false
+
     var body: some View {
-        Text("Hello, World!")
+        TabViewController(dataHandler:dataHandler, isLoggedIn: self.$isLoggedIn)
     }
 }
 
@@ -19,3 +22,5 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+

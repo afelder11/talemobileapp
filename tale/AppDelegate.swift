@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.swift
 //  tale
@@ -7,14 +8,31 @@
 //
 
 import UIKit
+import Firebase
+import RealmSwift
+
+var uiRealm = try! Realm()
+
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
+ class AppDelegate: UIResponder, UIApplicationDelegate {
+//error from logout page
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        FirebaseApp.configure()
+        
+        let config = Realm.Configuration(
+          // Set the new schema version. This must be greater than the previously used
+          // version (if you've never set a schema version before, the version is 0).
+          schemaVersion: 2,
+          migrationBlock: { migration, oldSchemaVersion in
+            if oldSchemaVersion < 1 {
+              // Apply any necessary migration logic here.
+            }
+          })
+        Realm.Configuration.defaultConfiguration = config
+        
         return true
     }
 
